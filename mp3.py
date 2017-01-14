@@ -2,13 +2,14 @@
 import eyed3 
 import datetime
 import MySQLdb
-import mysql.connector 
 
 
 
-con = mysql.connector.connect(user="avlanch4",password="", host="0.0.0.0", port="8080", database="c9")
+
+
+con = MySQLdb.connect("localhost","avlanch4","","c9" )
 cursor = con.cursor()
-cursor.create("CREATE TABLE IF NOT EXISTS musica(id int, titulo varchar(50),artista varchar(50), duracion time, genero varchar(20))")
+cursor.execute("CREATE TABLE IF NOT EXISTS musica(id int, titulo varchar(50),artista varchar(50), duracion time, genero varchar(20))")
 
 
 def print_menu():       ## Your menu design here
@@ -47,12 +48,16 @@ while loop:          ## While loop which will keep going until loop = False
         
         add_cancion = ("INSERT INTO musica "
                "(titulo, artista, duracion, genero) "
-               "VALUES (%s, %s, %s, %(s)", titulo, artista, duracion, genero)
+               "VALUES (titulo, artista, duracion, genero)")
+              
+               
+               
                
         cursor.execute(add_cancion)
         con.commit()
         cursor.close()
         con.close()
+        print ("cancion añadida")
         
         
     elif choice==2:
