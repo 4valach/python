@@ -66,7 +66,7 @@ while loop:          ## While loop which will keep going until loop = False
         cursor.execute(listar_est)
         result_set = cursor.fetchall()
         for row in result_set:
-            print ("%s" % (row["genero"]))
+            print (row[0])
         
         con.commit()
         cursor.close()
